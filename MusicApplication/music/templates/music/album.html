@@ -1,0 +1,55 @@
+{% extends "home/base.html" %}
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="container text-center">
+        <img src="{{album.image.url}}" alt="", style="width: 10rem;height:10rem;">
+        <h1>{{album.name}}</h1>
+        <div class="col">
+            {% for artist in artists %}
+                <a class="artist fs-4" href="{% url 'music:artist_info' artist.slug %}">{{artist.name}}</a>
+            {% endfor %}
+        </div>
+        <div class="col">
+            <a class="btn btn-success"><i class="fa fa-play"></i></a>
+            <a class="btn btn-love" style=""><i class="fa fa-heart"></i></a>
+        </div>
+    </div>
+    <div class="">
+        <table class="table table-fluid">
+            <thead>
+                <th>#</th>
+                <th>Tên bài hát</th>
+            </thead>
+            <tbody>
+                {% for track in tracks %}
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary" href="{% url 'music:track' track.slug%}"><i class="fa fa-play"></i></a>
+                            
+                        </td>
+                        <td>{{track.name}}</td>
+                    </tr>
+                  
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    .artist{
+        text-decoration: none;
+        color: darkblue;
+    }
+    .btn-love{
+        border-color: black;
+        border-radius: 60%;
+        background-color: whitesmoke;
+
+    }
+    .btn-love:hover{
+        border-color: black;
+        background-color: whitesmoke;
+    }
+</style>
+{% endblock content %}

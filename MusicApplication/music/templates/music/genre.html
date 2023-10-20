@@ -1,0 +1,68 @@
+{% extends "home/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="col">        
+            <h5>Việt Nam</h5>
+            {% for genre in genres_vn %}
+                <a class="btn btn-secondary" href="{% url 'music:genre_info' genre.slug %}">{{genre}}</a>
+            {% endfor %}
+        </div>
+        <div class="col">        
+            <h5>Hàn Quốc</h5>
+            {% for genre in genres_hq %}
+                <a class="btn btn-secondary" href="{% url 'music:genre_info' genre.slug %}">{{genre.name}}</a>
+            {% endfor %}
+        </div>
+        <div class="col">        
+            <h5>Âu Mỹ</h5>
+            {% for genre in genres_usuk %}
+                <a class="btn btn-secondary" href="{% url 'music:genre_info' genre.slug %}">{{genre.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-12">
+        <h2>Album hot nhất hiện nay</h2>
+        <div class="row">
+            {% for album in albums %}
+                <div class="col-3 p-2 text-center">
+                    <div class="row">
+                        <a href="{% url 'music:album' album.slug %}">
+                            <img src="{{album.image.url}}" alt="" style="height: 10rem;width: 10rem;">
+                        </a>
+                        <p class="fs-5">{{album.name}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-12">
+        <h2>Nhạc Hàn Quốc</h2>
+        <div class="row">
+            {% for album in hq %}
+                <div class="col-3 p-2 text-center">
+                    <div class="row">
+                        <a href="{% url 'music:album' album.slug %}">
+                            <img src="{{album.image.url}}" alt="" style="height: 10rem;width: 10rem;">
+                        </a>
+                        <p class="fs-5">{{album.name}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-12">
+        <h2>Nhạc Âu Mỹ</h2>
+        <div class="row">
+            {% for album in usuk %}
+                <div class="col-3 p-2 text-center">
+                    <div class="row">
+                        <a href="{% url 'music:album' album.slug %}">
+                            <img src="{{album.image.url}}" alt="" style="height: 10rem;width: 10rem;">
+                        </a>
+                        <p class="fs-5">{{album.name}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

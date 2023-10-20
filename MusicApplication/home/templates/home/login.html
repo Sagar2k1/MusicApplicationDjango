@@ -1,0 +1,86 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">Đăng Nhập</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">Đăng ký</button>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0">
+    <div class="wrapper">
+      <form method="post" action="{% url 'home:login_view' %}">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input placeholder="Nhập username" type="text" class="" name="username" required><br>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input placeholder="Nhập password" type="password" class="" name="password" required><br>
+          </div>
+          <div class="">
+              <input type="submit" class="btn btn-primary button" value="Đăng Nhập">
+              <a class="btn btn-info button"  href="">Đăng ký</a>
+            </div>
+      </form>
+    </div>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0">
+    <div class="wrapper">
+      <form method="post" action="{% url 'home:login_view' %}">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input placeholder="Nhập username" type="text" class="" name="username" required><br>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input placeholder="Nhập password" type="password" class="" name="password" required><br>
+          </div>
+          <div class="">
+              <input type="submit" class="btn btn-primary button" value="Đăng Nhập">
+              <a class="btn btn-info button"  href="">Đăng ký</a>
+            </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wrapper{
+    position: relative;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5%;
+    
+  }
+  .input-group{
+    position: relative;
+    margin: 30px 0;
+    border-bottom: 2px solid black;
+
+  }
+  .input-group label{
+    position: absolute;
+    top: 50%;
+    left: 0.0001rem;
+    transform: translateY(-160%);
+    pointer-events: none;
+    text-decoration: none;
+    text-wrap: wrap;
+  }
+  .input-group input{
+    width: 340px;
+    height: 40px;
+    font-size: 16px;
+    background: transparent;
+    background-color: none;
+    border: none;
+    outline: none;
+  }
+  .button{
+    
+  }
+</style>

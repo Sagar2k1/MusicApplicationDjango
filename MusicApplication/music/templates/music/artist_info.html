@@ -1,0 +1,65 @@
+{% extends "home/base.html" %}
+{% block content %}
+    <div class="container-fluid row">
+        <div class="mb-3 col-12">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{{artist.image.url}}" alt="" 
+                    style="width: 10rem;
+                    height: 10rem;" srcset="">
+                </div>
+                <div class="col-9">
+                    <h1>{{artist.name}}</h1>
+                    <p>{{artist.description}}</p>
+                </div>
+                {% if request.user.username %}                  
+                    <div>
+                        {% if userartist.is_follow %}
+                            <a class="btn btn-secondary" href="{% url 'music:artist_follow' artist.slug %}">
+                                <i class="fa fa-user-minus"></i>Unfollow
+                            </a>
+                        {% else %}
+                            <a class="btn btn-primary" href="{% url 'music:artist_follow' artist.slug %}">
+                                Follow
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="b-3 fs-2">
+                <h2>Album</h2>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    {% for album in albums %}
+                        <div class="col-3 text-center">
+                            <a href="{% url 'music:album' album.slug %}">                                
+                                <img src="{{album.image.url}}" style="width: 10rem; height: 10rem;" srcset="">
+                            </a>
+                            <p class="">{{album.name}}</p>
+                        </div>
+                      
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .trackList{
+            padding: 1px;
+
+        }
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        a{
+            text-decoration: none;
+            color: darkblue;
+        }
+    </style>
+{% endblock content %}

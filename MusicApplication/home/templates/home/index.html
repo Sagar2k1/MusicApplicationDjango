@@ -1,0 +1,27 @@
+{% extends "home/base.html" %}
+{%block content %}
+<h2>BXH Bài hát</h2>
+<table class="table table-striped">
+    <thead>
+    <th>#</th>
+    <th>Tên</th>
+    <th>Lượt theo dõi</th>
+    </thead>
+    <tbody>
+    {% for track in tracks2 %}
+        <tr>
+        <td><a href="{% url 'music:track' track.slug %}"><img src="{{track.image.url}}" alt="" style="width: 1rem; height: 1rem;"></a></td>
+        <td>{{track.name}}</td>
+        <td>{{track.streams}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+  
+
+
+
+{% endblock %}
+{% block content2 %}
+
+{% endblock content2 %}

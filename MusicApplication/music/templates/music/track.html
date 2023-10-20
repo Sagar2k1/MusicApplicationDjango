@@ -1,0 +1,9 @@
+{% extends "home/base.html" %}
+{% block content %}
+<div class="row">
+    <h3>{{track.name}}</h3>
+    <iframe scrolling="no" width="300" height="600" src="{{track.file}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreenframeborder="0" allowfullscreen>
+    </iframe>
+    <a class="btn btn-primary" href="">thêm vào danh sách chờ</a>
+</div>
+{% endblock content %}

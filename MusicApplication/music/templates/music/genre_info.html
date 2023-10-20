@@ -1,0 +1,28 @@
+{% extends "home/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-3">            
+            <img src="{{genre.image.url}}" alt="" style="width: 10rem; height:10rem;">
+        </div>
+        <div class="col-9">
+            <h1>{{genre.name}}</h1>
+            <p>
+                {{genre.description}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <h2>Album Nhạc {{genre.name}}</h2>
+        <div class="row text-center">
+            {% for album in albums %}
+                <div class="col-3">                        
+                    <a href='{% url "music:album" album.slug %}'>
+                        <img src="{{album.image.url}}" alt="" style="width: 10rem; height:10rem;">
+                    </a>
+                    <h5>{{album.name}}</h5>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
