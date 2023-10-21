@@ -1,3 +1,4 @@
 Django==4.2.4
-psycorg2
+psycopg2==2.9.9
 slugify
+Pillow==10.1.0
