@@ -1,0 +1,119 @@
+{% extends "home/base.html" %}
+{% block content %}
+  
+<form action="" method="get">
+    {% csrf_token %}
+    <div class="d-flex">
+        <div class="p-2">
+            <input class="form-control me-3" placeholder="Tìm kiếm bài hát khác" type="text" id="keywordInput" name="keywordInput" value="{{keywordInput}}"/>
+        </div>
+        <button type="submit" class="btn btn-primary p-2">Nhập</button>
+    </div>
+</form>
+<h2>Kết quả tìm kiếm {{keywordInput}}</h2>
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all" aria-selected="true">Tất cả</button>
+        <button class="nav-link" id="nav-track-tab" data-bs-toggle="tab" data-bs-target="#nav-track" type="button" role="tab" aria-controls="nav-track" aria-selected="false">Bài hát</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Album</button>
+    </div>
+</nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+        <div class="row">
+            <h3>Bài hát</h3>
+            <div class="col-9">
+                <div class="container-fluid">
+                    <div class="row ">
+                        {% for track in tracks %}
+                            <div class="col-3">
+                                <div class="card-body text-center">
+                                    <a class="rounded " href="{% url 'music:track' track.slug %}">
+                                        {% load static %}
+                                        <img src="{{track.image.url}}" alt="" style="width: 7rem;height: 7rem;" srcset="">
+                                    </a>
+                                    <div class="text-center fs-5">
+                                        <p>{{track.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <h3>Album</h3>
+            <div class="col-9">
+                <div class="container-fluid">
+                    <div class="row ">
+                        {% for album in albums %}
+                            <div class="col-3">
+                                <div class="card-body text-center">
+                                    <a class="rounded " href="{% url 'music:album' album.slug %}">
+                                        <img src="{{album.image.url}}" alt="" style="width: 7rem;height: 7rem;" srcset="">
+                                    </a>
+                                    <div class="text-center fs-5">
+                                        <p>{{album.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade show active" id="nav-track" role="tabpanel" aria-labelledby="nav-track-tab">
+        <div class="row">
+            <div class="col-9">
+                <div class="container-fluid">
+                    <div class="row ">
+                        {% for track in tracks2 %}
+                            <div class="col-3">
+                                <div class="card-body text-center">
+                                    <a class="rounded " href="{% url 'music:track' track.slug %}">
+                                        {% load static %}
+                                        <img src="{{track.image.url}}" alt="" style="width: 7rem;height: 7rem;" srcset="">
+                                    </a>
+                                    <div class="text-center fs-5">
+                                        <p>{{track.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="row">
+            <h3>Album</h3>
+            <div class="col-9">
+                <div class="container-fluid">
+                    <div class="row ">
+                        {% for album in albums2 %}
+                            <div class="col-3">
+                                <div class="card-body text-center">
+                                    <a class="rounded " href="{% url 'music:album' album.slug %}">
+                                        <img src="{{album.image.url}}" alt="" style="width: 7rem;height: 7rem;" srcset="">
+                                    </a>
+                                    <div class="text-center fs-5">
+                                        <p>{{album.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+{% endblock content %}

@@ -66,3 +66,22 @@
         </div>
     </div>
 {% endblock content %}
+{% block content2 %}
+<h2>BXH Bài hát</h2>
+<table class="table table-striped">
+    <thead>
+    <th>#</th>
+    <th>Tên</th>
+    <th>Lượt theo dõi</th>
+    </thead>
+    <tbody>
+    {% for track in tracks %}
+        <tr>
+        <td><a class="btn btn-success btn-play" href="{% url 'music:track' track.slug %}"><i class="fa fa-play"></i></a></td>
+        <td>{{track.name}}</td>
+        <td>{{track.streams}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content2 %}

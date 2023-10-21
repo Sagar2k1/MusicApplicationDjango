@@ -79,7 +79,7 @@ def artist_view(request):
     context = {
         'artists': artists_paginator,
         "keywordInput": keyword if keyword else "",
-        "key": slugify(keyword) if keyword else ""
+        "key": keyword if keyword else ""
     }
     return render(request, 'music/artist.html', context=context)
 
@@ -122,6 +122,60 @@ def track_view(request, slug):
         'track': track[0]
     }
     return render(request, 'music/track.html', context)
+
+def search(request):
+    track = Track.objects.all()
+    album = None
+    artist = None
+    page = request.GET.get("page")
+    limit = request.GET.get("limit")
+    keyword = request.GET.get('keywordInput')
+    
+    if not limit or not limit.isnumeric():
+        limit = settings.LIMIT_DEFAULT
+    if keyword:
+        track = Track.objects.filter(name__contains = keyword).values()
+        album = Album.objects.filter(name__contains = keyword).values()
+        artist = Artist.objects.filter(name__contains = keyword).values()
+    else:
+        track = Track.objects.all()
+        album = Album.objects.all()
+        artist = Artist.objects.all()
+        
+    track_paginator = Paginator(track, limit)
+    album_paginator = Paginator(album, limit)
+    artist_paginator = Paginator(artist, limit)
+    
+    try:
+        track_paginator = track_paginator.page(page)
+    except PageNotAnInteger:
+        track_paginator = track_paginator.page(1)
+    except EmptyPage:
+        track_paginator = track_paginator.page(track_paginator.num_pages)
+    
+    try:
+        album_paginator = album_paginator.page(page)
+    except PageNotAnInteger:
+        album_paginator = album_paginator.page(1)
+    except EmptyPage:
+        album_paginator = album_paginator.page(album_paginator.num_pages)
+    try:
+        artist_paginator = artist_paginator.page(page)
+    except PageNotAnInteger:
+        artist_paginator = artist_paginator.page(1)
+    except EmptyPage:
+        artist_paginator = artist_paginator.page(artist_paginator.num_pages)
+    
+    context = {
+        'tracks': track_paginator,
+        'albums': album_paginator,
+        'artists': artist_paginator,
+        'tracks2': track,
+        'albums2': album,
+        'artists2': artist,
+        "keywordInput": keyword if keyword else "",
+    }
+    return render(request, 'music/search.html', context)
 
 def artist_follow(request, slug):
     artist = Artist.objects.get(slug=slug)

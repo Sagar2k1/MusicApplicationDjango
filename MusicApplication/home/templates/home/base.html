@@ -14,7 +14,7 @@
   
 </head>
 
-<body style="background-color: rgba(78, 40, 113, 0.518);">
+<body style="background-color: rgb(51, 25, 74);">
   <div>
     <!-- Menu -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary " id="nav" data-bs-theme="dark">
@@ -64,24 +64,15 @@
               {% endif %}
             </li>
           </ul>
-          
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{keywordInput}}">
-            <a class="btn btn-outline-success" href="">Search</a>
-          </form>
-          <ul class="nav">
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
-              </ul>
-            </li>
-          </ul>
+          <form action="{% url 'music:search' %}" method="get">
+            {% csrf_token %}
+            <div class="d-flex">
+                <div class="p-2">
+                    <input class="form-control me-2" type="text" id="keywordInput" name="keywordInput" placeholder="Search" value="{{keywordInput}}"/>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Tìm kiếm</button>
+            </div>
+        </form>
         </div>
       </div>
     </nav>
@@ -92,23 +83,7 @@
         {% block content %}{% endblock content %}
       </div>
       <div class="col-12 col-lg-3">
-        <h2>BXH Bài hát</h2>
-        <table class="table table-striped">
-          <thead>
-            <th>#</th>
-            <th>Tên</th>
-            <th>Lượt theo dõi</th>
-          </thead>
-          <tbody>
-            {% for track in tracks %}
-              <tr>
-                <td><a class="btn btn-success btn-play" href="{% url 'music:track' track.slug %}"><i class="fa fa-play"></i></a></td>
-                <td>{{track.name}}</td>
-                <td>{{track.streams}}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        
         {% block content2 %}
         {% endblock %}
       </div>
@@ -126,6 +101,36 @@
       div#nav{
         color: black;
         background-color: black;
+      }
+      h1{
+        color: white
+      }
+      h2{
+        color: white
+      }
+      h3{
+        color: white
+      }
+      h4{
+        color: white
+      }
+      h5{
+        color: white
+      }
+      a{
+        color: white
+      }
+      td{
+        color: white
+      }
+      p{
+        color: white
+      }
+      span{
+        color: white;
+      }
+      label{
+        color: white
       }
   </style>
   <script>
